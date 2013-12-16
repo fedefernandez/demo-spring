@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <bean id="messageService" class="es.us.eii.sugus.xml.MessageService">
         <constructor-arg ref="transactionManager"/>
@@ -15,6 +17,18 @@
     <bean id="messagePrinter" class="es.us.eii.sugus.xml.MessagePrinter">
         <property name="service" ref="messageService"/>
     </bean>
+
+    <!-- Enable @Controller annotation support -->
+    <mvc:annotation-driven />
+
+    <!-- Map simple view name such as "test" into /WEB-INF/views/test.jsp -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- Scan classpath for annotations (eg: @Service, @Repository etc) -->
+    <context:component-scan base-package="es.us.eii.sugus"/>
 
     <!-- JDBC Data Source. It is assumed you have MySQL running on localhost port 3306 with
          username root and blank password. Change below if it's not the case -->
