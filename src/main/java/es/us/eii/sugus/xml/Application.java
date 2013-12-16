@@ -1,7 +1,6 @@
 package es.us.eii.sugus.xml;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Application {
