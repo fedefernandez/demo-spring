@@ -4,10 +4,6 @@ public class MessagePrinter {
 
     private IMessageService service;
 
-    public IMessageService getService() {
-        return service;
-    }
-
     public void setService(IMessageService service) {
         this.service = service;
     }
